@@ -1,0 +1,94 @@
+﻿@model IEnumerable<PhatHanhSach.Models.TONKHO>
+@using PhatHanhSach.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<script>
+            function FilterTonKho() {
+                var input, filter, table, tr, td, i;
+                input = document.getElementById("Filter-TenSach");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("TableTonKho");
+                tr = table.getElementsByTagName("tr");
+
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+            function FilterThoiGian() {
+                var input, filter, table, tr, td, i;
+                input = document.getElementById("Filter-ThoiGian");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("TableTonKho");
+                tr = table.getElementsByTagName("tr");
+
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[2];
+                    if (td) {
+                        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+</script>
+
+<div class="form-horizontal">
+    <div class="col-md-2">
+        <label class="control-label">Tên Sách</label>
+        <input id="Filter-TenSach" type="text" class="form-control" onkeyup="FilterTonKho()" placeholder="Nhập tên sách..." style="float:left" />
+    </div>      
+    <div class="col-md-2">
+        <label class="control-label">Thời Gian</label>
+        <input type="datetime" id="Filter-ThoiGian" onkeyup="FilterThoiGian()" class="form-control" placeholder="Nhập ngày..." />
+    </div>
+
+    <table class="table" id="TableTonKho">
+        <tr>
+            <th>
+                @Html.DisplayName("Mã Sách")
+            </th>
+            <th>
+                @Html.DisplayName("Tên Sách")
+            </th>
+            <th>
+                @Html.DisplayName("Thời Gian")
+            </th>
+            <th>
+                @Html.DisplayName("Số Lượng")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SACH.TenSach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThoiGian)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SLTon)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

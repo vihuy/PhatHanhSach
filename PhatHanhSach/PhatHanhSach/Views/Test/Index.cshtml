@@ -1,0 +1,51 @@
+﻿@using PhatHanhSach.Models
+@model SACH
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
+<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<script type="text/javascript">
+        $(function () {
+            $("#TenSach").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Test/Search/',
+                        data: "{ 'prefix': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    $("#MaSach").val(i.item.val);
+                },
+                minLength: 1
+            });
+        });
+</script>
+
+<h2>XuatSach</h2>
+@using (@Html.BeginForm("ThemChiTiet", "QuanLyPhieuXuat", FormMethod.Post))
+{
+    <label class="label">Tìm kiếm</label>
+    <input type="text" id="TenSach" name="TenSach" class="form-control" />
+    <input type="hidden" id="MaSach" name="MaSach" />
+    <button type="submit" class="btn btn-success">Thêm chi tiết phiếu xuất</button>
+}
+

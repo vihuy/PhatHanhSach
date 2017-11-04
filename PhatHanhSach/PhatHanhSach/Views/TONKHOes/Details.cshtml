@@ -1,0 +1,35 @@
+﻿@model PhatHanhSach.Models.TONKHO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TONKHO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SLTon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SLTon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SACH.TenSach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SACH.TenSach)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

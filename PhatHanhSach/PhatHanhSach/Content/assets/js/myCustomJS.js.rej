@@ -1,0 +1,12 @@
+diff a/PhatHanhSach/PhatHanhSach/Content/assets/js/myCustomJS.js b/PhatHanhSach/PhatHanhSach/Content/assets/js/myCustomJS.js	(rejected hunks)
+@@ -0,0 +1,9 @@
++﻿var listSach = [];
++
++$("#dataTable tbody tr").each(function (index, elem) {
++    var masach = $(this).class(".masach").html();
++    var tensach = $(this).class(".tensach").html();
++    var giasach = $(this).class(".giasach").html();
++    var soluong = $(this).class(".soluong").html();
++
++});
+\ No newline at end of file

@@ -1,0 +1,6 @@
+diff a/PhatHanhSach/PhatHanhSach/Views/Layout/AdminLayout.cshtml b/PhatHanhSach/PhatHanhSach/Views/Layout/AdminLayout.cshtml	(rejected hunks)
+@@ -2,3 +3,4 @@
++<<<<<<< HEAD
+ ﻿<!doctype html>
+ <html>
+ 
