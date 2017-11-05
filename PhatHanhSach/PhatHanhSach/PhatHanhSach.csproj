@@ -169,6 +169,7 @@
     <Compile Include="Controllers\NhapSachController.cs" />
     <Compile Include="Controllers\QuanLyNXBController.cs" />
     <Compile Include="Controllers\QuanLyPhieuXuatController.cs" />
+    <Compile Include="Controllers\SachController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TONKHOesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -945,6 +946,9 @@
     <Content Include="Views\BAOCAODLs\Details.cshtml" />
     <Content Include="Views\BAOCAODLs\Edit.cshtml" />
     <Content Include="Views\BAOCAODLs\Index.cshtml" />
+    <Content Include="Views\Sach\Index.cshtml" />
+    <Content Include="Views\Sach\ThemSach.cshtml" />
+    <Content Include="Views\NhapSach\NhapSach.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

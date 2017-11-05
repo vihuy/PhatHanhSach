@@ -14,19 +14,26 @@ namespace PhatHanhSach.Controllers
 
         public ActionResult Index()
         {
+            var list = entities.PHIEUNHAPs.ToList();
+            
+            return View(list);
+        }
+
+        public ActionResult NhapSach()
+        {
             NHAXUATBAN nxb = new NHAXUATBAN();
 
             var getnxblist = entities.NHAXUATBANs.ToList();
             SelectList list = new SelectList(getnxblist, "MaNXB", "Ten");
             ViewBag.nxblistname = list;
 
-            if(Session["listSach"] == null) 
+            if (Session["listSach"] == null)
                 Session["listSach"] = new List<SachViewModel>();
 
             return View();
         }
-
         [HttpPost]
+        // Gợi ý khi nhập tên sách
         public JsonResult AutoComplete(string prefix)
         {
             var sachlist = (from s in entities.SACHes
@@ -43,13 +50,22 @@ namespace PhatHanhSach.Controllers
         [HttpPost]
         public ActionResult ThemVaoBang(SachViewModel sachVM)
         {
-            // Xu ly code truy xuat sach
-            SACH sach = entities.SACHes.Where(s => s.TenSach == sachVM.TenSach).FirstOrDefault();
-            sachVM.MaSach = sach.MaSach;
-            sachVM.TenSach = sach.TenSach;
-            sachVM.GiaNhap = (int)sach.DonGiaNhap;
-            ((List<SachViewModel>)Session["listSach"]).Add(sachVM);
-            return RedirectToAction("Index");
+            var tonTaiSach = entities.SACHes.Where(x => x.TenSach == sachVM.TenSach).ToList();
+            if (tonTaiSach.Count != 0)
+            {
+                SACH sach = entities.SACHes.Where(s => s.TenSach == sachVM.TenSach).FirstOrDefault();
+                sachVM.MaSach = sach.MaSach;
+                sachVM.TenSach = sach.TenSach;
+                sachVM.GiaNhap = (int)sach.DonGiaNhap;
+                ((List<SachViewModel>)Session["listSach"]).Add(sachVM);
+                return RedirectToAction("NhapSach");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Trong CSDL không có tên sách này";
+                return RedirectToAction("NhapSach");
+
+            }
         }
 
         public ActionResult XoaKhoiBang(int MaSach)
